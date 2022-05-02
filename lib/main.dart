@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/choose_location.dart';
+import 'package:flutter_app/pages/home.dart';
+import 'package:flutter_app/pages/loading.dart';
 import 'package:flutter_app/quote.dart';
+import 'package:flutter_app/quote_card.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    // home: Home()
+  runApp(MaterialApp(
+    // home: HomeTest()
     // home: IdCard()
-    home: QuotesList()
+    // home: QuotesList()
+    initialRoute: '/',
+    routes: {
+      '/': (context) => const Loading(),
+      '/home': (context) => const Home(),
+      '/location': (context) => const ChooseLocation(),
+    },
   ));
 }
 
-// class Home extends StatelessWidget {
-//   const Home({Key? key}) : super(key: key);
+// class HomeTest extends StatelessWidget {
+//   const HomeTest({Key? key}) : super(key: key);
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -59,8 +69,8 @@ void main() {
 //   }
 // }
 
-// class Home extends StatelessWidget {
-//   const Home({Key? key}) : super(key: key);
+// class HomeTest extends StatelessWidget {
+//   const HomeTest({Key? key}) : super(key: key);
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -91,8 +101,8 @@ void main() {
 //   }
 // }
 
-// class Home extends StatelessWidget {
-//   const Home({Key? key}) : super(key: key);
+// class HomeTest extends StatelessWidget {
+//   const HomeTest({Key? key}) : super(key: key);
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -129,8 +139,8 @@ void main() {
 //   }
 // }
 
-// class Home extends StatelessWidget {
-//   const Home({Key? key}) : super(key: key);
+// class HomeTest extends StatelessWidget {
+//   const HomeTest({Key? key}) : super(key: key);
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -178,8 +188,8 @@ void main() {
 //   }
 // }
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeTest extends StatelessWidget {
+  const HomeTest({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -354,35 +364,6 @@ class _QuotesListState extends State<QuotesList> {
     Quote('Aliquam congue feugiat metus, et mollis orci ullamcorper eget.', 'John Rock'),
   ];
 
-  Widget quoteTemplate(quote) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              quote.text,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.grey[600]
-              )
-            ),
-            SizedBox(height: 10),
-            Text(
-                quote.author,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey[500]
-                )
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -393,9 +374,15 @@ class _QuotesListState extends State<QuotesList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((quote) => quoteTemplate(quote)).toList(),
+        children: quotes.map((quote) => QuoteCard(
+            quote: quote,
+            onDelete: () {
+              setState(() {
+                quotes.remove(quote);
+              });
+            }
+        )).toList(),
       ),
     );
   }
 }
-
