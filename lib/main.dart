@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/choose_location.dart';
-import 'package:flutter_app/pages/home.dart';
-import 'package:flutter_app/pages/loading.dart';
+import 'package:flutter_app/trips_app/screens/home.dart';
+import 'package:flutter_app/world_time_pages/choose_location.dart';
+import 'package:flutter_app/world_time_pages/home.dart';
+import 'package:flutter_app/world_time_pages/loading.dart';
 import 'package:flutter_app/quote.dart';
 import 'package:flutter_app/quote_card.dart';
 
 void main() {
-  runApp(MaterialApp(
-    // home: HomeTest()
-    // home: IdCard()
-    // home: QuotesList()
-    initialRoute: '/',
-    routes: {
-      '/': (context) => const Loading(),
-      '/home': (context) => const Home(),
-      '/location': (context) => const ChooseLocation(),
-    },
-  ));
+  // runApp(MaterialApp(
+  //   home: HomeTest()
+  // ));
+
+  // runApp(MaterialApp(
+  //   home: IdCard()
+  // ));
+
+  // runApp(MaterialApp(
+  //   home: QuotesList()
+  // ));
+
+  // runApp(MaterialApp(
+  //   initialRoute: '/',
+  //   routes: {
+  //     '/': (context) => const Loading(),
+  //     '/home': (context) => const Home(),
+  //     '/location': (context) => const ChooseLocation(),
+  //   },
+  // ));
+
+  runApp(TripsApp());
 }
 
 // class HomeTest extends StatelessWidget {
@@ -383,6 +395,18 @@ class _QuotesListState extends State<QuotesList> {
             }
         )).toList(),
       ),
+    );
+  }
+}
+
+// Trips
+class TripsApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Trips',
+      home: TripsHome(),
     );
   }
 }
